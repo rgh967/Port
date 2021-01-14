@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Recipes">
+	<resultMap id="recipeMap" type="Recipe">
+		<id column="RECIPE_ID" property="RECIPE_ID"/>
+		<result column="RECIPE_TITLE" property="RECIPE_TITLE"/>
+		<result column="RECIPE_MAIN_IMG" property="RECIPE_MAIN_IMG"/>
+		<result column="RECIPE_INTRO" property="RECIPE_INTRO"/>
+		<result column="RECIPE_URL" property="RECIPE_URL"/>
+		<result column="RECIPE_PEOPLE" property="RECIPE_PEOPLE"/>
+		<result column="RECIPE_TIME" property="RECIPE_TIME"/>
+		<result column="RECIPE_DEGREE" property="RECIPE_DEGREE"/>
+		<result column="RECIPE_READCOUNT" property="RECIPE_READCOUNT"/>
+		
+		<association javaType="Member" property="member">
+			<id column="MEMBER_ID" property="MEMBER_ID"/>
+			<result column="MEMBER_NAME" property="MEMBER_NAME"/>
+			<result column="MEMBER_RANK" property="MEMBER_RANK"/>
+		</association>
+		<association javaType="RecipeReview" property="recipeReview">
+			<id column="REVIEW_ID" property="REVIEW_ID"/>
+			<result column="RECIPE_ID" property="RECIPE_ID"/>
+			<result column="REVIEW_STAR" property="REVIEW_STAR"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectRecipe" parameterType="int" resultType="recipe">
+		select * 
+		from RECIPE
+		WHERE RECIPE_ID = #{RECIPE_ID}
+	</select>
+
+	<select id="selectRecipeMId" parameterType="int" resultMap="recipeMap">
+		select r.*, m.MEMBER_RANK, m.MEMBER_NAME  
+		from RECIPE r, MEMBER m
+		WHERE RECIPE_ID = #{RECIPE_ID}
+	</select>
+	<select id="selectRecipeCount" resultType="int">
+		select count(*)
+		from RECIPE
+	</select>
+	<select id="selectRecipeStepList" parameterType="int" resultType="recipeStep">
+		select * 
+		from RECIPE_STEP
+		WHERE RECIPE_ID = #{RECIPE_ID}
+	</select>
+	<select id="selectRecipeIngList" parameterType="int" resultType="recipeIng">
+		select * 
+		from RECIPE_ING
+		WHERE RECIPE_ID = #{RECIPE_ID}
+	</select>
+	
+	<select id="selectRecipeList" parameterType="map" resultMap="recipeMap">
+		select * 
+		from
+			( select rownum rnum, b.*
+			  from
+				  ( select r.RECIPE_ID, r.RECIPE_TITLE, r.RECIPE_MAIN_IMG, 
+				  		   SUBSTR(r.RECIPE_INTRO, 1, 25) as RECIPE_INTRO,
+				  	 	   r.RECIPE_URL, r.RECIPE_PEOPLE, r.RECIPE_TIME, r.RECIPE_DEGREE,
+				  	 	   r.RECIPE_READCOUNT, m.MEMBER_RANK, m.MEMBER_NAME 
+				  	from recipe r, member m
+				  	where r.MEMBER_ID = m.MEMBER_ID) b
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="selectRecipeListOrderId" parameterType="map" resultMap="recipeMap">
+		select * 
+		from
+			( select rownum rnum, b.*
+			  from
+				  ( select r.*, m.MEMBER_RANK, m.MEMBER_NAME 
+				  	from recipe r, member m
+				  	where r.MEMBER_ID = m.MEMBER_ID
+				  	order by r.RECIPE_ID) b
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="selectRecipeListOrderRank" parameterType="map" resultMap="recipeMap">
+		select * 
+		from
+			( select rownum rnum, b.*
+			  from
+				  ( select r.*, m.MEMBER_RANK, m.MEMBER_NAME 
+				  	from recipe r, member m
+				  	where r.MEMBER_ID = m.MEMBER_ID
+				  	order by m.MEMBER_RANK) b
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="selectRecipeId" resultType="int">
+		SELECT NVL(MAX(RECIPE_ID), 0)+1 FROM recipe 
+	</select>
+
+	<insert id="insertRecipe" parameterType="recipe">
+		INSERT INTO recipe
+		(RECIPE_ID, MEMBER_ID, RECIPE_TITLE, 
+		 RECIPE_MAIN_IMG, RECIPE_INTRO, RECIPE_URL,
+		 RECIPE_PEOPLE, RECIPE_TIME, RECIPE_DEGREE)
+		VALUES
+		(#{RECIPE_ID}, #{MEMBER_ID}, #{RECIPE_TITLE}, 
+		 #{RECIPE_MAIN_IMG}, #{RECIPE_INTRO}, #{RECIPE_URL},
+		 #{RECIPE_PEOPLE}, #{RECIPE_TIME}, #{RECIPE_DEGREE}) 
+	</insert>
+	
+	<update id="updateRecipeReadCount" parameterType="int">
+		update recipe 
+		set RECIPE_READCOUNT = RECIPE_READCOUNT + 1
+		where RECIPE_ID = #{RECIPE_ID}
+	</update>
+	
+	<!-- search 기능 -->
+	<select id="selectRecipeAllCount" parameterType="map" resultType="int">
+		select count(*) 
+		from(select *
+			 from recipe r, member m 
+			 where r.MEMBER_ID = m.MEMBER_ID
+			)
+		where RECIPE_TITLE like '%' || #{TITLE} || '%'
+		 	  or MEMBER_NAME like '%' || #{MEMBER_NAME} || '%'
+	</select>
+	<select id="selectRecipeAllList" parameterType="map" resultMap="recipeMap">
+		select *
+		from(select r.RECIPE_ID, r.RECIPE_TITLE, r.RECIPE_MAIN_IMG, 
+				    SUBSTR(r.RECIPE_INTRO, 1, 25) as RECIPE_INTRO,
+				  	r.RECIPE_URL, r.RECIPE_PEOPLE, r.RECIPE_TIME, r.RECIPE_DEGREE,
+				  	r.RECIPE_READCOUNT, m.MEMBER_RANK, m.MEMBER_NAME 
+			from recipe r, member m
+			 where r.MEMBER_ID = m.MEMBER_ID
+			)
+		where RECIPE_TITLE like '%' || #{TITLE} || '%'
+		 	  or MEMBER_NAME like '%' || #{MEMBER_NAME} || '%'
+	</select>
+	
+	<select id="selectRecipeTitleCount" parameterType="String" resultType="int">
+		select count(*)
+		from recipe
+		where RECIPE_TITLE like '%' || #{RECIPE_TITLE} || '%'
+	</select>
+	<select id="selectRecipeTitleList" parameterType="map" resultMap="recipeMap">
+		select *
+		from(select r.RECIPE_ID, r.RECIPE_TITLE, r.RECIPE_MAIN_IMG, 
+				  	SUBSTR(r.RECIPE_INTRO, 1, 25) as RECIPE_INTRO,
+				  	r.RECIPE_URL, r.RECIPE_PEOPLE, r.RECIPE_TIME, r.RECIPE_DEGREE,
+				  	r.RECIPE_READCOUNT, m.MEMBER_RANK, m.MEMBER_NAME 
+			 from recipe r, member m
+			 where r.MEMBER_ID = m.MEMBER_ID
+			)
+		where RECIPE_TITLE like '%' || #{RECIPE_TITLE} || '%'
+	</select>
+	
+	<select id="selectRecipeNameCount" parameterType="String" resultType="int">
+		select count(*) 
+		from(select *
+			 from recipe r, member m 
+			 where r.MEMBER_ID = m.MEMBER_ID
+			)
+		where MEMBER_NAME like '%' || #{MEMBER_NAME} || '%'
+	</select>
+	<select id="selectRecipeNameList" parameterType="map" resultMap="recipeMap">
+		select *
+		from(select r.RECIPE_ID, r.RECIPE_TITLE, r.RECIPE_MAIN_IMG, 
+				  	SUBSTR(r.RECIPE_INTRO, 1, 25) as RECIPE_INTRO,
+				  	r.RECIPE_URL, r.RECIPE_PEOPLE, r.RECIPE_TIME, r.RECIPE_DEGREE,
+				  	r.RECIPE_READCOUNT, m.MEMBER_RANK, m.MEMBER_NAME 
+			 from recipe r, member m
+			 where r.MEMBER_ID = m.MEMBER_ID
+			)
+		where MEMBER_NAME like '%' || #{MEMBER_NAME} || '%'
+	</select>
+</mapper>

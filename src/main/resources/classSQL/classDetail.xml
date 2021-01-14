@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yorijori.cook.classDAO.ClassDetailDAO">
+	<insert id="insertDetail" parameterType="ClassDetailDTO">
+		INSERT INTO CLASS_DETAIL
+		(CLASS_ID, DETAIL_STEP, DETAIL_CONTENT, DETAIL_IMAGE)
+		 VALUES
+		(#{CLASS_ID}, #{DETAIL_STEP}, #{DETAIL_CONTENT}, #{DETAIL_IMAGE}) 
+	</insert>	
+		
+</mapper>

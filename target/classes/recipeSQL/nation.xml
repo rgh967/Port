@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Nations">
+	<select id="selectNation" parameterType = "int" resultType="nation">
+		select *
+		from CATEGORY_NATION 
+		where NATION_ID = #{find}
+	</select>
+		
+	<insert id="insertNation" parameterType="recipeCtgNation">
+		insert into RECIPE_CTG_NATION
+		values (#{RECIPE_ID}, #{NATION_ID})
+	</insert>
+</mapper>

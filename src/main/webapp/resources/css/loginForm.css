@@ -1,0 +1,102 @@
+@charset "EUC-KR";
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #F9F7E8;
+}
+
+* {
+	box-sizing: border-box
+}
+img {
+    vertical-align: middle;
+    width: 350px;
+  	height: 150px;
+ 	object-fit: cover;
+ 	align-items: center;
+ 	justify-content: center;
+}
+
+
+input[type=text], input[type=password] {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: 1px solid lightgray;
+	background: #F9F7E8;
+	border-radius: 2px;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+	background-color: #F9F7E8;
+	outline: none;
+}
+
+.submitbtn {
+	background-color: #FF8B8B;
+	color: white;
+	padding: 15PX;
+	margin: 5px 0 22px 0;
+	border: none;
+	cursor: pointer; /* 손가락 커서 모양 */
+	width: 100%;
+	opacity: 0.9;
+}
+
+button:hover {
+	opacity: 1;
+}
+
+button:focus {
+	outline: none;
+}
+
+.find{
+	background-color: #F9F7E8;
+	color: black;
+	width: 30%;
+	float : right;
+	border: none;
+	margin: 5px 0 22px 0;
+	opacity: 0.6;
+	padding-right: 10%;
+}
+
+.join{
+	background-color: #F9F7E8;
+	color: black;
+	width: 30%;
+	float : right;
+	border: none;
+	margin: 5px 0 22px 0;
+	opacity: 0.6;
+	padding-left: 21%;
+}
+
+form {
+	background-color: #F9F7E8;
+	margin: 10% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	width: 50%; /* Could be more or less, depending on screen size */
+	padding: 16px;
+	vertical-align: middle;
+	
+}
+
+/* Clear floats */
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+	.signupbtn {
+		width: 100%;
+}
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;}
+
+}

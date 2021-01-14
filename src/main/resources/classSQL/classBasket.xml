@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yorijori.cook.classDAO.ClassBasketDAO">
+	<!-- 찜하기 -->
+	<select id="selectClove" parameterType="CloveDTO" resultType="int">
+		select count(*)
+		from CLOVE
+		where CLASS_ID = #{CLASS_ID} and MEMBER_ID = #{MEMBER_ID}
+	</select>
+	<insert id="insertClove" parameterType="CloveDTO">
+		insert into CLOVE 
+		values(#{CLASS_ID}, #{MEMBER_ID})
+	</insert>
+	
+	<!-- 수강신청 -->
+	<select id="selectBuy" parameterType="BuyDTO" resultType="int">
+		select count(*)
+		from BUY
+		where CLASS_ID = #{CLASS_ID} and MEMBER_ID = #{MEMBER_ID}
+	</select>
+	<insert id="insertBuy" parameterType="BuyDTO">
+		insert into BUY 
+		values(BUY_SEQ.nextval, #{CLASS_ID}, #{MEMBER_ID}, sysdate)
+	</insert>
+	<update id="updateClass">
+		update CLASS
+		set CLASS_REG_PEOPLE = CLASS_REG_PEOPLE + 1
+		where CLASS_ID = #{CLASS_ID}
+	</update>
+</mapper>

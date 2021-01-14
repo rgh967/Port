@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.count_area dd strong {
+    position: relative;
+    display: block;
+    float: left;
+    width: 50px;
+    text-align: center;
+    padding-bottom: 3px;
+    margin-right: 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: #FF8B8B;
+    color: #fff;
+    font-size: 50px;
+    font-family: Microsoft YaHei,'NSB';
+}
+li img.mainimg {
+	display: block;
+	height: 518px;
+	list-style: none;
+	width: 100%;
+}
+li.mainli{
+	height: 518px;
+	width:100%;
+	margin-right: -100%;
+	position: relative;
+    opacity: 1;
+    display: block;
+}
+
+
+.count_area{
+    left: 40%;
+	color:black;
+	position:relative;
+	top:-10px;
+	font-size: 40px;
+}
+ul.banner-slider{
+	padding: 0px;
+}

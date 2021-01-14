@@ -1,0 +1,140 @@
+#container {
+	width: 1045px; 
+	margin:0 auto; 
+	max-width: none !important;
+}
+
+#container h2{
+	color: #333;
+}
+#recipeCount{
+	color: #FF8B8B;	
+}
+
+/*View 화면 조정*/
+.contentListView{
+	margin: 30px 0;
+	box-shadow: 4px 4px 4px 4px lightgray;
+	border-radius: 5px;
+	padding: 10px 20px;
+}
+.listCount{
+	font-size: 20px;
+}
+
+/*list 출력 형식*/
+#container ul {
+    list-style: none;
+}
+.lst_ul {
+    overflow: hidden;
+    margin: 30px 0 20px 0;
+    padding: 0;
+    width: 1024px;
+    position: relative;
+    font-family:Microsoft YaHei,'NS','돋움',Dotum,'굴림',Gulim,Helvetica,sans-serif;
+	font-size:12px;
+}
+.lst_ul>li {
+    width: 244px;
+    height: 340px;
+    margin: 0 10px 10px 0;
+    position: relative;
+    border: 1px solid #e1e1e1;
+    box-sizing: border-box;
+    float: left;
+    background-color: #fff;
+}
+#lst_ul_class>li {
+    height: 390px;
+}
+.lst_ul li #picture{
+	margin:4px;
+	width:234px;
+	height:234px;
+	display:block
+}
+.content {
+	text-align: center;
+	margin: 15px 10px;
+	height: 116px;
+}
+#title{
+	font-weight: bold;
+	font-size: 18px;
+}
+
+/*recipe 출력 형식*/
+.lst_ul li .judge{
+	position:absolute;
+	top:10px;
+	left:7px;
+	color:#eee;
+	font-size:13px;
+	text-align:center;
+	line-height:1;
+	z-index:5
+}
+.lst_ul li .star{
+	position:absolute;
+	top:220px;
+	left:10px;
+	color:#eee;
+	font-size:13px;
+	text-align:center;
+	line-height:1;
+	z-index:5
+}
+#stars {
+	width:10px;
+	height:10px;
+}
+.lst_ul li .readcount{
+	position:absolute;
+	top:220px;
+	right:30px;
+	color:#eee;
+	font-size:13px;
+	text-align:center;
+	line-height:1;
+	z-index:5
+}
+#intro {
+   display: inline-block;
+   width: 70%;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+/*class 출력 형식*/
+.lst_ul li .people{
+	position:absolute;
+	top:220px;
+	right:30px;
+	color:#eee;
+	font-size:13px;
+	text-align:center;
+	line-height:1;
+	z-index:5
+}
+#title {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/*헤더*/
+#srhText{
+	width: 334px;
+	height: 25px;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+#searchbtn{
+  width: 42px;
+  height:41px;
+}
+#searchImg{
+    width: 30px;
+  	height: 30px;
+}

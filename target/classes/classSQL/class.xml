@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yorijori.cook.classDAO.ClassDAO">
+	<resultMap id="classMap" type="ClassDTO">
+		<id column="CLASS_ID" property="CLASS_ID"/>
+		<result column="CLASS_TITLE" property="CLASS_TITLE"/>
+		<result column="CLASS_MAIN_IMG" property="CLASS_MAIN_IMG"/>
+		<result column="CLASS_APP_STARTDATE" property="CLASS_APP_STARTDATE"/>
+		<result column="CLASS_APP_ENDDATE" property="CLASS_APP_ENDDATE"/>
+		<result column="CLASS_STARTDATE" property="CLASS_STARTDATE"/>
+		<result column="CLASS_ENDDATE" property="CLASS_ENDDATE"/>
+		<result column="CLASS_STARTTIME" property="CLASS_STARTTIME"/>
+		<result column="CLASS_ENDTIME" property="CLASS_ENDTIME"/>
+		<result column="CLASS_PEOPLE" property="CLASS_PEOPLE"/>
+		<result column="CLASS_REG_PEOPLE" property="CLASS_REG_PEOPLE"/>
+		<result column="CLASS_COST" property="CLASS_COST"/>
+		<result column="CLASS_ADDRESS" property="CLASS_ADDRESS"/>
+		<result column="CLASS_LECTURER" property="CLASS_LECTURER"/>
+		
+		<association javaType="MemberDTO" property="member">
+			<id column="MEMBER_ID" property="MEMBER_ID"/>
+			<result column="MEMBER_NAME" property="MEMBER_NAME"/>
+			<result column="MEMBER_RANK" property="MEMBER_RANK"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectClassId" resultType="int">
+		SELECT NVL(MAX(CLASS_ID), 0)+1 FROM class
+	</select>
+
+	<insert id="insertClass" parameterType="ClassDTO">
+		INSERT INTO class
+		(CLASS_ID, MEMBER_ID, CLASS_TITLE, CLASS_MAIN_IMG, 
+		 CLASS_APP_STARTDATE, CLASS_APP_ENDDATE, CLASS_STARTDATE, CLASS_ENDDATE, CLASS_STARTTIME, CLASS_ENDTIME, 
+		 CLASS_PEOPLE, CLASS_REG_PEOPLE, CLASS_COST, CLASS_ADDRESS, CLASS_LECTURER )
+		VALUES
+		(#{CLASS_ID}, #{MEMBER_ID}, #{CLASS_TITLE}, #{CLASS_MAIN_IMG}, 
+		 #{CLASS_APP_STARTDATE}, #{CLASS_APP_ENDDATE}, #{CLASS_STARTDATE},#{CLASS_ENDDATE},
+		 TO_DATE(#{CLASS_STARTTIME},'HH24:MI'), TO_DATE(#{CLASS_ENDTIME},'HH24:MI'), 
+		 #{CLASS_PEOPLE}, #{CLASS_REG_PEOPLE}, #{CLASS_COST}, #{CLASS_ADDRESS}, #{CLASS_LECTURER} ) 
+	</insert>
+	
+	<select id="selectClass" parameterType="int" resultType="ClassDTO">
+		select CLASS_ID, MEMBER_ID, CLASS_TITLE, CLASS_MAIN_IMG, 
+			to_char(CLASS_APP_STARTDATE,'YYYY-MM-DD')  as CLASS_APP_STARTDATE, to_char(CLASS_APP_ENDDATE,'YYYY-MM-DD') as CLASS_APP_ENDDATE, 
+			to_char(CLASS_STARTDATE,'YYYY-MM-DD') as CLASS_STARTDATE, to_char(CLASS_ENDDATE,'YYYY-MM-DD') as CLASS_ENDDATE,
+			to_char(CLASS_STARTTIME,'HH24:MI') as CLASS_STARTTIME, to_char(CLASS_ENDTIME,'HH24:MI') as CLASS_ENDTIME, 
+			CLASS_PEOPLE, CLASS_REG_PEOPLE, CLASS_COST, CLASS_ADDRESS, CLASS_LECTURER
+		from CLASS
+		WHERE CLASS_ID = #{CLASS_ID}
+	</select>
+	<select id="selectClassCurriculumList" parameterType="int" resultType="ClassCurriculumDTO">
+		select * 
+		from CLASS_CURRICULUM
+		WHERE CLASS_ID = #{CLASS_ID}
+	</select>
+	<select id="selectClassDetailList" parameterType="int" resultType="ClassDetailDTO">
+		select * 
+		from CLASS_DETAIL
+		WHERE CLASS_ID = #{CLASS_ID}
+	</select>
+	
+	<select id="selectRegiOK" parameterType="int" resultType="int">
+		select count(*)
+		from CLASS
+		WHERE CLASS_ID = #{CLASS_ID} and CLASS_APP_STARTDATE <![CDATA[ <= ]]> sysdate and CLASS_APP_ENDDATE <![CDATA[ >= ]]> sysdate
+	</select>
+
+	<select id="selectClassCount" resultType="int">
+		select count(*)
+		from CLASS
+	</select>
+	
+	<select id="selectChkClassCount" resultType="int">
+		select count(*)
+		from CLASS
+		where to_char(CLASS_STARTDATE,'YYYY-MM-DD') &gt;= #{from} and to_char(CLASS_ENDDATE,'YYYY-MM-DD') &lt;= #{to}
+		and CLASS_COST &gt;= #{amount1} and CLASS_COST &lt;= #{amount2}
+	</select>
+	
+	<select id="selectClassList" parameterType="map" resultMap="classMap">
+		select *
+		from
+			( select rownum rnum, b.*
+			  from
+			  	  ( select c.CLASS_ID, c.MEMBER_ID, CLASS_TITLE, CLASS_MAIN_IMG, 
+			  	  	to_char(CLASS_APP_STARTDATE,'YYYY-MM-DD') as CLASS_APP_STARTDATE, 
+			  	  	to_char(CLASS_APP_ENDDATE,'YYYY-MM-DD') as CLASS_APP_ENDDATE, 
+					to_char(CLASS_STARTDATE,'YYYY-MM-DD') as CLASS_STARTDATE, 
+					to_char(CLASS_ENDDATE,'YYYY-MM-DD') as CLASS_ENDDATE,
+					to_char(CLASS_STARTTIME,'HH24:MI') as CLASS_STARTTIME, 
+					to_char(CLASS_ENDTIME,'HH24:MI') as CLASS_ENDTIME, 
+					CLASS_PEOPLE, CLASS_REG_PEOPLE, CLASS_COST, CLASS_ADDRESS, 
+					CLASS_LECTURER, m.MEMBER_NAME
+			  	  	from CLASS c, MEMBER m
+			  	  	where c.MEMBER_ID = m.MEMBER_ID) b
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="selectChkClassList" parameterType="map" resultMap="classMap">
+		select *
+		from
+			( select rownum rnum, b.*
+			  from
+			  	  ( select c.CLASS_ID, c.MEMBER_ID, CLASS_TITLE, CLASS_MAIN_IMG, 
+			  	  	to_char(CLASS_APP_STARTDATE,'YYYY-MM-DD') as CLASS_APP_STARTDATE, 
+			  	  	to_char(CLASS_APP_ENDDATE,'YYYY-MM-DD') as CLASS_APP_ENDDATE, 
+					to_char(CLASS_STARTDATE,'YYYY-MM-DD') as CLASS_STARTDATE, 
+					to_char(CLASS_ENDDATE,'YYYY-MM-DD') as CLASS_ENDDATE,
+					to_char(CLASS_STARTTIME,'HH24:MI') as CLASS_STARTTIME, 
+					to_char(CLASS_ENDTIME,'HH24:MI') as CLASS_ENDTIME, 
+					CLASS_PEOPLE, CLASS_REG_PEOPLE, CLASS_COST, CLASS_ADDRESS, 
+					CLASS_LECTURER, m.MEMBER_NAME
+			  	  	from CLASS c, MEMBER m
+			  	  	where c.MEMBER_ID = m.MEMBER_ID
+			  	  	and to_char(CLASS_STARTDATE,'YYYY-MM-DD') &gt;= #{from} and to_char(CLASS_ENDDATE,'YYYY-MM-DD') &lt;= #{to}
+			  	  	and CLASS_COST &gt;= #{amount1} and CLASS_COST &lt;= #{amount2}) b
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+
+	<select id="selectClassStartDate" resultType="string">
+		SELECT to_char(CLASS_STARTDATE,'YYYY-MM-DD') as CLASS_STARTDATE
+    	FROM (SELECT  * FROM CLASS ORDER BY CLASS_STARTDATE)
+    	WHERE ROWNUM = 1
+	</select>
+	
+	<select id="selectClassEndDate" resultType="string">
+		SELECT to_char(CLASS_ENDDATE,'YYYY-MM-DD') as CLASS_ENDDATE
+    	FROM (SELECT  * FROM CLASS ORDER BY CLASS_ENDDATE DESC)
+    	WHERE ROWNUM = 1
+	</select>
+</mapper>

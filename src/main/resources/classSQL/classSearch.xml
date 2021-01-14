@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yorijori.cook.classDAO.ClassSearchDAO">
+	<resultMap id="classMap" type="ClassDTO">
+		<id column="CLASS_ID" property="CLASS_ID"/>
+		<result column="CLASS_TITLE" property="CLASS_TITLE"/>
+		<result column="CLASS_MAIN_IMG" property="CLASS_MAIN_IMG"/>
+		<result column="CLASS_APP_STARTDATE" property="CLASS_APP_STARTDATE"/>
+		<result column="CLASS_APP_ENDDATE" property="CLASS_APP_ENDDATE"/>
+		<result column="CLASS_STARTDATE" property="CLASS_STARTDATE"/>
+		<result column="CLASS_ENDDATE" property="CLASS_ENDDATE"/>
+		<result column="CLASS_STARTTIME" property="CLASS_STARTTIME"/>
+		<result column="CLASS_ENDTIME" property="CLASS_ENDTIME"/>
+		<result column="CLASS_PEOPLE" property="CLASS_PEOPLE"/>
+		<result column="CLASS_REG_PEOPLE" property="CLASS_REG_PEOPLE"/>
+		<result column="CLASS_COST" property="CLASS_COST"/>
+		<result column="CLASS_ADDRESS" property="CLASS_ADDRESS"/>
+		<result column="CLASS_LECTURER" property="CLASS_LECTURER"/>
+		
+		<association javaType="MemberDTO" property="member">
+			<id column="MEMBER_ID" property="MEMBER_ID"/>
+			<result column="MEMBER_NAME" property="MEMBER_NAME"/>
+			<result column="MEMBER_RANK" property="MEMBER_RANK"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectClassAllCount" parameterType="map" resultType="int">
+		select count(*) 
+		from(select *
+			 from class c, member m 
+			 where c.MEMBER_ID = m.MEMBER_ID
+			)
+		where CLASS_TITLE like '%' || #{TITLE} || '%'
+		 	  or MEMBER_NAME like '%' || #{MEMBER_NAME} || '%'
+	</select>
+	<select id="selectClassAllList" parameterType="map" resultMap="classMap">
+		select *
+		from(select c.*, m.MEMBER_RANK, m.MEMBER_NAME 
+			 from class c, member m 
+			 where c.MEMBER_ID = m.MEMBER_ID
+			)
+		where CLASS_TITLE like '%' || #{TITLE} || '%'
+		 	  or MEMBER_NAME like '%' || #{MEMBER_NAME} || '%'
+	</select>
+	
+	<select id="selectClassTitleCount" parameterType="String" resultType="int">
+		select count(*)
+		from class
+		where CLASS_TITLE like '%' || #{CLASS_TITLE} || '%'
+	</select>
+	<select id="selectClassTitleList" parameterType="map" resultMap="classMap">
+		select *
+		from(select c.*, m.MEMBER_RANK, m.MEMBER_NAME 
+			 from class c, member m 
+			 where c.MEMBER_ID = m.MEMBER_ID
+			)
+		where CLASS_TITLE like '%' || #{CLASS_TITLE} || '%'
+	</select>
+	
+	<select id="selectClassNameCount" parameterType="String" resultType="int">
+		select count(*) 
+		from(select *
+			 from class c, member m 
+			 where c.MEMBER_ID = m.MEMBER_ID
+			)
+		where MEMBER_NAME like '%' || #{MEMBER_NAME} || '%'
+	</select>
+	<select id="selectClassNameList" parameterType="map" resultMap="classMap">
+		select *
+		from(select c.*, m.MEMBER_RANK, m.MEMBER_NAME 
+			 from class c, member m 
+			 where c.MEMBER_ID = m.MEMBER_ID
+			)
+		where MEMBER_NAME like '%' || #{MEMBER_NAME} || '%'
+	</select>
+</mapper>

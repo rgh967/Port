@@ -1,0 +1,171 @@
+@charset "UTF-8";
+body {
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+	display: block;
+	width: 100%;
+	margin: 0;
+}
+
+button{
+	cursor: pointer;
+}
+.gnbtop {
+    width: 1240px;
+   	margin: 0 auto;
+   	padding:0 120px;
+}
+
+.gnblogo{
+	width: 400px;
+	display: inline-block;
+}
+.gnbsearch {
+	margin: 0px 60px;
+    width: 500px;
+    height: 30px;
+    display: inline-block;
+    padding: 12px 0px;    
+}
+
+.gnbsetting {
+	width: 100px;
+	display: inline-block;
+	padding-right:100px;
+	vertical-align: middle;
+	
+}
+
+a img.logo{
+	vertical-align: middle;
+    width: 280px;
+  	height: 80px;
+  	padding-top:20px;
+ 	object-fit: cover;
+ 	align-items: left;
+ 	justify-content: left;
+    border: 0;
+}
+nav.gnbright{
+	 width: 180px;
+   	 display: inline-block;
+     justify-content: right;
+	 position: relative;
+}
+
+#srhType{
+	width: 70px;
+	height: 40px;
+	vertical-align: middle;
+}
+#srhText{
+	border: 3px solid #FF8B8B;
+	background-color: #F9F7E8;
+	width: 350px;
+	height: 41px;
+    padding: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
+	vertical-align: middle;
+}
+#searchbtn{
+  background-color: #FF8B8B;
+  border-radius: 0rem;
+  height:41px;
+  border: none;
+  cursor: pointer;
+}
+#searchImg{
+	text-align:center;
+	vertical-align: middle;
+    width: 30px;
+  	height: 30px;
+}
+
+.member, .insert{
+	vertical-align: middle;
+    width: 45px;
+  	height: 45px;
+ 	align-items: right;
+ 	justify-content: right;
+ 	float: right;
+
+}
+
+
+.dropbtn {
+  background-color: transparent ;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: gray}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: transparent;
+}
+
+.gnbnav {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+  background-color: #FF8B8B;
+  text-align:center;
+}
+
+.gnbnavea10 {
+ 	width: 1240px;
+    margin: 0 auto;
+    padding: 9px 25px 0;
+    text-align: center;
+}
+
+.gnbnavea10 > li {
+  float: center;
+  display:inline;
+}
+
+.gnbnavea10 > li a {
+  display:inline-block;
+  color: white;
+  text-align: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0px 8%;
+  text-decoration: none;
+}
+.gnbnavea10 > li a:hover:not(.active) {
+  background-color: pink;
+  color: white;
+}

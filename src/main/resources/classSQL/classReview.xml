@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yorijori.cook.classDAO.ClassReviewDAO">
+	<resultMap id="reviewMap" type="ClassReviewDTO">
+		<id column="REVIEW_ID" property="REVIEW_ID"/>
+		<result column="MEMBER_ID" property="MEMBER_ID"/>
+		<result column="REVIEW_CONTENT" property="REVIEW_CONTENT"/>
+		<result column="REVIEW_STAR" property="REVIEW_STAR"/>
+		<result column="REVIEW_DATE" property="REVIEW_DATE"/>
+		
+		<association javaType="MemberDTO" property="member">
+			<id column="MEMBER_ID" property="MEMBER_ID"/>
+			<result column="MEMBER_NAME" property="MEMBER_NAME"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectReviewCount" parameterType="int" resultType="int">
+		select count(*) 
+		from CLASS_REVIEW 
+		where CLASS_ID = #{CLASS_ID}
+	</select>
+	
+	<select id="selectReviewList" parameterType="map" resultMap="reviewMap">
+		select * 
+		from(select rownum rnum, REVIEW_ID, CLASS_ID, r.MEMBER_ID, MEMBER_NAME, REVIEW_CONTENT, REVIEW_STAR, REVIEW_DATE
+	 		 from (select *
+		 		   from CLASS_REVIEW
+				   where CLASS_ID = #{CLASS_ID}
+				   order by REVIEW_DATE desc
+				   ) r, MEMBER m
+			 where r.MEMBER_ID = m.MEMBER_ID
+			 )
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<insert id="insertReview" parameterType="classReviewDTO">
+		insert into CLASS_REVIEW 
+		values(RECIPE_REVIEW_SEQ.nextval, #{CLASS_ID}, #{MEMBER_ID}, #{REVIEW_CONTENT}, 0, sysdate)
+	</insert>
+	
+		
+	<update id="updateReview" parameterType="classReviewDTO">
+		update CLASS_REVIEW 
+		set MEMBER_ID = #{MEMBER_ID}, REVIEW_CONTENT = #{REVIEW_CONTENT}, REVIEW_STAR = 0, REVIEW_DATE = sysdate 
+		where REVIEW_ID = #{REVIEW_ID}
+	</update>
+	
+	<delete id="deleteReview" parameterType="int">
+		delete from CLASS_REVIEW 
+		where REVIEW_ID = #{REVIEW_ID}
+	</delete>
+	
+	<select id="selectReview" parameterType="classReviewDTO" resultType="int">
+		select count(*) 
+		from (select b.CLASS_ID class_ID, b.MEMBER_ID member_ID, c.CLASS_ENDDATE endDate
+			  from BUY b, CLASS c
+			  where b.CLASS_ID = c.CLASS_ID
+			  )
+		where class_ID = #{CLASS_ID} and member_ID = #{MEMBER_ID} and endDate <![CDATA[ < ]]> sysdate
+	</select>
+	
+</mapper>

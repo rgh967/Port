@@ -1,0 +1,171 @@
+@charset "UTF-8";
+
+.container {width: 1240px; margin:0 auto; max-width: none !important;}
+.container {background:#fff; border:1px solid #e6e7e8; padding:0 120px;}
+
+.pad_l_00 {padding-left:00px !important;}
+.pad_l_30 {padding-left:30px !important;}
+.pad_l_60 {padding-left:60px !important;}
+
+.cont_line_800 {display:inline-block; margin-left:10px; width:810px; padding:20px 0 0 0;}
+
+.regi_title {background:#f9f7e8; border-bottom:1px solid #e6e7e8; padding:14px 18px; font-size:20px; font-weight:bold; position:relative;}
+.regi_left {width:550px; display:inline-block; border:1px solid #e6e7e8; border-right:1px solid #b2b2b2; background:#fff; vertical-align:top; margin:0; padding:0;}
+.regi_right {width:690px; display:inline-block; border:1px solid #e6e7e8; background:#fff; margin:0; padding:0; float:right; }
+.regi_top .regi_center .regi_btm{ border:1px solid #e6e7e8; background:#fff; margin:0; padding:0; }
+
+.space_set { background-color:#f9f7e8; font-size:12pt; }
+
+.iuput_text_300 {width:300px; height:30px; padding:0px 10px; }
+.iuput_text_600 {width:600px; height:30px; padding:0px 10px; }
+.iuput_textArea_600 {width:600px; height:100px; resize:none; padding:10px;}
+
+select { width:260px; height:30px; }
+
+.cont_tit4 {width:140px; display:inline-block; font-size:20px; font-weight:normal; 
+			vertical-align:top; margin-top:0px;}
+.cont_tit1 {width:100px; display:inline-block; font-size:20px; font-weight:normal; 
+			vertical-align:top; margin-top:0px;}
+.color_green { color:#61BFAD; font-weight:600;}
+
+.btn_submit{width:100px; height:40px; border-radius:2px; outline:0px; border:none; font-size:15px;
+				background:#61BFAD; color:#fff;}
+.btn_reset{width:100px; height:40px; border-radius:2px; outline:0px; border:none;  font-size:15px;
+				background:#ff8b8b; color:#fff;}
+
+/* 요리 순서 */
+.div_step {padding:10px 0px;}
+.img_step{ width:160px; height:160px; cursor:pointer; }
+.img_main{width: 280px; height: 280px; cursor:pointer;}
+
+/*
+	*!important
+	CSS는 같은 속성을 여러 번 정의했을 때, 나중에 설정한 값이 적용됩니다. 
+	만약 나중에 설정한 값이 적용되지 않게 하려면 속성값 뒤에 !important를 붙입니다.
+*/
+
+
+
+/* 레시피 등록 요리 대표사진 */
+.cont_pic2 {width:250px; float:right; margin-right:60px; margin-top:20px;}
+.cont_pic2 img {border:1px solid #e1e1e1;}
+/*------------*/
+
+/* 재료추가 입력란, */
+.pad_b_25 {padding-bottom:25px !important;}
+
+.font_20{font_size:20px;}
+
+.cont_box {padding:26px 30px; border-bottom:10px solid #f9f7e8; margin:0 -1px;}
+.regi_btm { background:#fff; text-align:center; padding:30px 0 40px 0; border-top:none;}
+.regi_btm { padding:12px 50px;}
+
+
+
+/* 재료  */
+
+.ingredient_add{ margin-left:20px; display:inline-block;}
+.btn_img { width:20px; height:20px; }
+.btn_del { display:block; width:25px; height:25px; vertical-align:middle; margin-left:10px;} /* a태그 */
+.a_btn_add { text-decoration:none; color:#999999; font-size:18px;} /* a태그 */
+.div_btn_add { padding:0 0 20px 300px; width:820px; }
+/*-----------------------------------------------------*/
+/*-----------------------------------------------------*/
+
+.cont_line_800 {display:inline-block; margin-left:10px; width:810px; padding:20px 0 0 0;}
+
+/*카테고리 체크 박스  */
+
+ol, ul {
+    list-style: none;
+    padding-left:0px;
+}
+
+.finder{ display:inline-block; width:1000px; margin:auto 0px 10px;}
+/*overflow - hidden : 넘치는 부분 잘려서 보이지 않음 */
+
+.finder>dl{
+	width:33.3%;
+	box-sizing:border-box;
+	border-left:1px solid #e1e1e1;
+	float:left;
+	margin: auto 0px 0px;
+}
+
+.finder>dl:first-child{
+	border-left:none
+}
+
+/*카테고리 title*/
+.finder dt span{ font-size:15px; color:#fff; }
+.finder dt{
+	padding:10px 0 9px 13px;
+	color:#3b3b3b;
+	border-bottom:1px solid #e1e1e1;
+	letter-spacing:-0.025em;
+	background-color: #FF8B8B;
+}
+
+
+/*카테고리 contents*/
+.finder dd{
+	background-color:#F9F7E8;
+	height:135px;
+	box-sizing:border-box;
+	overflow-x:auto;
+	overflow-y:visible;
+	margin:0px;
+}
+
+
+.finder .lst_check{
+	width:auto;
+	background-color:#fff
+}
+
+.finder li label{
+	display:block;
+	position:relative;
+	cursor:pointer;
+	font-size:14px;
+	color:#6f6e6e;
+	box-sizing:border-box;
+	background:#F9F7E8;
+	border-top:1px solid #e1e1e1;
+	padding:7px 0 9px 33px;
+}
+
+.finder dl li:first-child label{
+	border:none
+}
+
+.finder li:hover>label{
+	/* 마우스 올라갔을 때의 효과 */
+	color:#FF8B8B;
+}
+
+/*카테고리 체크박스 안보이도록 설정*/
+.finder li label input{
+	display:none
+}
+
+.finder .lst_check>li label{
+	position:relative;
+	padding-right:25px
+}
+
+/*헤더*/
+#srhText{
+	width: 334px;
+	height: 25px;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+#searchbtn{
+  width: 42px;
+  height:41px;
+}
+#searchImg{
+    width: 30px;
+  	height: 30px;
+}

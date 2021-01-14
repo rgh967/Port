@@ -1,0 +1,241 @@
+@charset "UTF-8";
+
+#logo{
+	width: 100px;
+	float: left;
+}
+.rego_line {
+	background:#f9f7e8; 
+	border-bottom:1px solid #FF8B8B; 
+	padding: 5px 0 0 40px; 
+	position: relative;
+}
+/*전체화면*/
+.class_view{
+	width: 1240px;
+	margin: 0 auto;
+	text-align: center;
+}
+/*우측 영역*/
+.aside{
+	width: 340px;
+	background: #F9F7E8;
+	float: right;
+}
+/*죄측 영역*/
+.section{
+	width: 900px;
+	float: left;
+}
+/*상단 영역*/
+.top{
+	height: 600px;
+}
+
+
+/*우측상단 영역*/
+/*작성자 정보*/
+.user{
+	margin: 50px 40px;
+}
+.img_user{
+	width: 240px;
+	margin-bottom: 25px;
+}
+/*요리 기본 정보*/
+.basic_info{
+	margin: 50px auto;
+}
+.basic_info_table{
+	text-align: left;
+	margin-top: 5px;
+	width: 270px;
+	margin: 0 auto;
+}
+.basic_info_table th{
+	width: 85px;
+}
+/*버튼*/
+.btn-area{
+	margin: 55px 85px;
+}
+.btn-area button{
+	border: none;
+	width: 80px;
+	border-radius: 10px;
+	height: 40px;
+	color: white;
+	float: left;
+}
+.btn-area button:disabled {
+	color: lightgray;
+	background: gray;
+ }
+.clove{
+	background: #FF8B8B;
+	margin-right: 5px;
+}
+.buy{
+	background: #61BFAD;
+}
+.btn-area span{
+	color: #FF8B8B;
+	font-size: 9px;
+}
+
+/*우측 하단 영역*/
+/*클래스 환불 규정*/
+.refund_regu{
+	margin: 50px 20px;
+	width: 300px;
+	opacity: 0.7;
+}
+
+/*좌측 영역*/
+.top_main{
+	margin: 50px 100px;
+	text-align: left;
+}
+.mid_main, .btm_main{
+	margin: 50px 120px;
+	text-align: left;
+}
+/*좌측상단 영역*/
+/*레시피 대표 사진*/
+.class_picture{
+	width: 700px;
+	height: 450px;
+}
+.class_content{
+	text-align: left;
+	color: gray;
+}
+.class_content h3{
+	float: left;
+}
+.class_content ul{
+	float: left;
+}
+/*좌측중간 영역*/
+/*클래스 기본정보*/ 
+.mid_main table{
+	border-collapse: collapse;
+	margin: 0 20px;
+	width: 620px;
+	text-align: center;
+	font-size: 13px;
+}
+.mid_main table tr{
+	border: 2px solid lightgray;
+}
+.mid_main table tr:nth-child(4){
+	border-bottom: 3px solid gray;
+}
+.mid_main table td{
+	padding: 5px 0;
+}
+
+.mid_main table tr:nth-child(1) td:nth-child(2){
+	color: #FF8B8B;
+	font-weight: bold;
+}
+.mid_main table tr:nth-child(2) td:nth-child(2n+1){
+	width: 150px;
+}
+.mid_main table tr:nth-child(2) td:nth-child(2){
+	width: 195px;
+}
+.mid_main table tr:nth-child(2) td:nth-child(4){
+	width: 125px;
+}
+
+.mid_main table td:nth-child(2n+1){
+	font-weight: bold;
+	background: #F4F6F6;
+}
+.mid_main table tr:nth-child(n+4) td:nth-child(2){
+	text-align: left;
+	padding: 5px 20px;
+}
+/*좌측하단 영역*/
+/*클래스 상세정보*/ 
+.btm_main h4{
+	color: #FF8B8B; 
+}
+.btm_main ul{
+	margin: 0 20px;
+	padding: 0;
+}
+.btm_main img{
+	margin: 20px 20px 10px 20px;
+	width: 580px;
+}
+.btm_main p{
+	margin: 0 20px 40px 20px;
+}
+
+/*하단 후기 영역*/
+.sec_review{
+	margin: 50px 120px;
+	text-align: left;
+}
+.review{
+	margin: 0 10px;
+}
+.review_btn{
+	width: 80px;
+	height: 30px;
+	float: right;
+	margin-right: 15px;
+	background: #FF8B8B;
+	border: none;
+	border-radius: 10px 10px 0 0;
+}
+.review textarea{
+	width: 620px;
+	height: 50px;
+}
+#message{
+	text-align: center;
+}
+.review_table{
+	width: 626px;
+	border-top: 1px solid #F4F6F6;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 10pt;
+}
+.review_table td {
+    border-bottom: 1px solid #F4F6F6;
+    padding: 10px;
+}
+.review_table td:nth-child(1) {
+	color: #FF8B8B;
+}
+.review_table td:nth-child(4) {
+	font-size: 5pt;
+	color: gray;
+}
+.review_table tr:nth-child(2n){
+	background: #F4F6F6;
+}
+#moreview{
+	margin: 0 289px;
+	color: #FF8B8B;
+}
+
+/*헤더*/
+#srhText{
+	width: 334px;
+	height: 25px;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+#searchbtn{
+  width: 42px;
+  height:41px;
+}
+#searchImg{
+    width: 30px;
+  	height: 30px;
+}

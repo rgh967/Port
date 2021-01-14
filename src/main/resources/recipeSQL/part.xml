@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Parts">
+	<select id="selectPart" parameterType = "int" resultType="part">
+		select *
+		from CATEGORY_PART
+		where PART_ID = #{find}
+	</select>
+	
+	<insert id="insertPart" parameterType="recipeCtgPart">
+		insert into RECIPE_CTG_PART
+		values (#{RECIPE_ID}, #{PART_ID})
+	</insert>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="member" type="com.yorijori.cook.DTO.MemberDTO"/>
+		<typeAlias alias="recipe" type="com.yorijori.cook.DTO.RecipeDTO"/>
+		<typeAlias alias="chef" type="com.yorijori.cook.DTO.CategoryChefDTO"/>
+		<typeAlias alias="nation" type="com.yorijori.cook.DTO.CategoryNationDTO"/>
+		<typeAlias alias="part" type="com.yorijori.cook.DTO.CategoryPartDTO"/>
+		<typeAlias alias="notice" type="com.yorijori.cook.DTO.NoticeDTO"/>
+		<typeAlias alias="question" type="com.yorijori.cook.DTO.QuestionDTO"/>
+		<typeAlias alias="recipeIng" type="com.yorijori.cook.DTO.RecipeIngDTO"/>
+		<typeAlias alias="recipeStep" type="com.yorijori.cook.DTO.RecipeStepDTO"/>
+		<typeAlias alias="recipeCtgChef" type="com.yorijori.cook.DTO.RecipeCtgChefDTO"/>
+		<typeAlias alias="recipeCtgNation" type="com.yorijori.cook.DTO.RecipeCtgNationDTO"/>
+		<typeAlias alias="recipeCtgPart" type="com.yorijori.cook.DTO.RecipeCtgPartDTO"/>
+		<typeAlias alias="recipeReview" type="com.yorijori.cook.DTO.RecipeReviewDTO"/>
+		<typeAlias alias="scrap" type="com.yorijori.cook.DTO.ScrapDTO"/>
+		<typeAlias alias="subscribe" type="com.yorijori.cook.DTO.SubscribeDTO"/>
+	</typeAliases>
+	
+	<typeHandlers>
+        <typeHandler handler="com.yorijori.cook.handler.CLOBHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+	</typeHandlers>
+	
+	<mappers>
+		<mapper resource="recipeSQL/member.xml"/>
+		<mapper resource="recipeSQL/recipe.xml"/>
+		<mapper resource="recipeSQL/chef.xml"/>
+		<mapper resource="recipeSQL/nation.xml"/>
+		<mapper resource="recipeSQL/part.xml"/>
+		<mapper resource="recipeSQL/recipeIng.xml"/>
+		<mapper resource="recipeSQL/recipeStep.xml"/>
+		<mapper resource="recipeSQL/recipectg_chef.xml"/>
+		<mapper resource="recipeSQL/recipectg_nation.xml"/>
+		<mapper resource="recipeSQL/recipectg_part.xml"/>
+		<mapper resource="recipeSQL/recipeReview.xml"/>
+		<mapper resource="recipeSQL/recipeBasket.xml"/>
+		<mapper resource="recipeSQL/notice.xml"/>
+		<mapper resource="recipeSQL/question.xml"/>
+	</mappers>
+	
+</configuration>
